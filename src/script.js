@@ -121,6 +121,10 @@ function preloadImage(){
   mode_1_Img = loadImage("./assets/mode_1.png");
 }
 
+// 時間表示の設置。
+const timeCounter = document.createElement('div');
+document.body.appendChild(timeCounter);
+
 function preload(){
   // 画像とか音とか入れることになったらって思うから分けるか
   preloadImage();
@@ -142,6 +146,7 @@ function setup(){
 }
 
 function draw(){
+  const start = performance.now(); // 時間表示。
   clear();
   background(220);
   // ここでも位置修正するようにした
@@ -157,6 +162,9 @@ function draw(){
     drawSprites();
   }
   drawText(); // テキスト描画
+  const end = performance.now();
+  const timeStr = (end - start).toPrecision(4);
+  timeCounter.innerText = `${timeStr}ms`;
 }
 
 // 文字関係
